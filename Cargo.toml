@@ -1,4 +1,5 @@
 [package]
+features =["fn_traits"]
 name = "ctfp"
 version = "0.1.0"
 authors = ["Timur <timur.makarchuk@gmail.com>"]
