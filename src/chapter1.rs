@@ -2,10 +2,10 @@ pub fn id<T>(x: T) -> T {
     x
 }
 
-pub fn compose<A, B, C>(f: Box<dyn Fn(A) -> B>, g: Box<dyn Fn(B) -> C>) -> Box<dyn Fn(A) -> C>
-where A: 'static,
-    B: 'static,
-    C: 'static,
+pub fn compose<F, G, A, B, C>(f: F, g: G) -> impl Fn(A) -> C + Sized
+where
+    F: Fn(A) ->B + Sized,
+    G: Fn(B) ->C + Sized,
 {
     return Box::new(move |a: A| g(f(a)))
 }
