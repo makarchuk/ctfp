@@ -4,7 +4,7 @@ use std::hash::Hash;
 struct Memoize<F, A, B>
 where
     F: Fn(A) -> B,
-    A: Eq+Hash+Clone,
+    A: Eq + Hash + Clone,
     B: Clone,
 {
     f: F,
@@ -15,7 +15,7 @@ where
 impl<F, A, B> Memoize<F, A, B>
 where
     F: Fn(A) -> B,
-    A: Eq+Hash+Clone,
+    A: Eq + Hash + Clone,
     B: Clone,
 {
     pub fn new(f: F) -> Self {
@@ -23,14 +23,14 @@ where
             f,
             cache: HashMap::new(),
             calls_count: 0,
-        }
+        };
     }
 }
 
 impl<F, A, B> FnMut<(A,)> for Memoize<F, A, B>
 where
     F: Fn(A) -> B,
-    A: Eq+Hash+Clone,
+    A: Eq + Hash + Clone,
     B: Clone,
 {
     extern "rust-call" fn call_mut(&mut self, args: (A,)) -> Self::Output {
@@ -46,10 +46,10 @@ where
 }
 
 impl<F, A, B> FnOnce<(A,)> for Memoize<F, A, B>
-    where
-        F: Fn(A) -> B,
-        A: Eq+Hash+Clone,
-        B: Clone,
+where
+    F: Fn(A) -> B,
+    A: Eq + Hash + Clone,
+    B: Clone,
 {
     type Output = B;
 
@@ -60,10 +60,10 @@ impl<F, A, B> FnOnce<(A,)> for Memoize<F, A, B>
 #[cfg(test)]
 mod test {
     use super::*;
-    # [test]
-    fn test_memoize(){
+    #[test]
+    fn test_memoize() {
         fn length(s: String) -> usize {
-            return s.len()
+            return s.len();
         }
         let mut memoize = Memoize::new(length);
         assert_eq!(memoize("aaaaa".to_owned()), 5);
