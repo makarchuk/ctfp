@@ -1,5 +1,5 @@
 #[derive(Debug)]
-struct Optional<T> {
+pub struct Optional<T> {
     value: Option<T>,
     is_valid: bool,
 }
@@ -63,9 +63,7 @@ mod test {
 
     #[test]
     fn test_safe_root_reciprocal_happy() {
-        let safe_root_reciprocal = compose(
-            compose(safe_sqrt, id), compose(id, safe_reciprocal)
-        );
+        let safe_root_reciprocal = compose(compose(safe_sqrt, id), compose(id, safe_reciprocal));
         let result = safe_root_reciprocal(3.0);
         assert!(result.is_valid);
         assert_eq!((1.0_f64 / 3.0_f64.sqrt()), result.value.unwrap())

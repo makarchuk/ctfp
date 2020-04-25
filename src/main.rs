@@ -1,9 +1,10 @@
 #![feature(fn_traits)]
 #![feature(unboxed_closures)]
 
-mod chapter1;
-mod chapter2;
-mod chapter4;
+pub mod chapter1;
+pub mod chapter2;
+pub mod chapter4;
+pub mod chapter7;
 
 fn main() {
     println!("Category Theory For Programmers!");
