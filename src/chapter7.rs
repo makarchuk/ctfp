@@ -16,7 +16,7 @@ where
     A: 'static,
     R: 'static,
 {
-    fn map<G, B>(self, mapper: G) -> Reader<Box<dyn Fn(R)->B>, R, B>
+    fn map<G, B>(self, mapper: G) -> Reader<Box<dyn Fn(R) -> B>, R, B>
     where
         G: Fn(A) -> B + Sized + 'static,
         B: 'static,
@@ -45,10 +45,7 @@ mod test {
             f: Box::new(|x: String| x.len()),
         };
 
-        let composition = chapter1::compose(
-            Box::new(|x: usize| x * 2),
-            Box::new(|x: usize| x + 1),
-        );
+        let composition = chapter1::compose(Box::new(|x: usize| x * 2), Box::new(|x: usize| x + 1));
         assert_eq!(
             composition("Hello".len()),
             strlen_reader
@@ -68,5 +65,4 @@ mod test {
             chapter1::id("test".len()),
         );
     }
-
 }
