@@ -5,6 +5,7 @@ pub mod chapter1;
 pub mod chapter2;
 pub mod chapter4;
 pub mod chapter7;
+pub mod chapter8;
 
 fn main() {
     println!("Category Theory For Programmers!");
